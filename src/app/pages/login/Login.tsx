@@ -1,6 +1,6 @@
 // import { Link } from "react-router-dom";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom"
 
 
@@ -21,13 +21,18 @@ export const Login = () => {
         }
     }, []);
 
-    useEffect(() => {
-        console.log(email)
-    }, [email]);
+    // useEffect(() => {
+    //     console.log(email)
+    // }, [email]);
 
-    useEffect(() => {
-        console.log(password)
-    }, [password]);
+    // useEffect(() => {
+    //     console.log(password)
+    // }, [password]);
+
+    const emailLength = useMemo(() => {
+        console.log('RUN')
+        return email.length * 1000;
+    }, [email.length])
 
     const handleLogin = () => {
         console.log(email);
@@ -45,6 +50,7 @@ export const Login = () => {
                 <label>
                     <span>Email</span>
                     <input value={email} onChange={e => (setEmail(e.target.value))} type="text"/>
+                    <p>Characters Length: {emailLength}</p>
                 </label>
 
                 <label>
