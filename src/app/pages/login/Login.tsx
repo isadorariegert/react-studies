@@ -1,6 +1,6 @@
 // import { Link } from "react-router-dom";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom"
 
 
@@ -12,6 +12,8 @@ export const Login = () => {
 
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+
+    const inputPasswordRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         if (window.confirm('Are you a man?')) {
@@ -34,10 +36,16 @@ export const Login = () => {
         return email.length * 1000;
     }, [email.length])
 
-    const handleLogin = () => {
+    // const handleLogin = () => {
+    //     console.log(email);
+    //     console.log(password);
+    // } another way using callback:
+
+    const handleLogin = useCallback(() => {
         console.log(email);
         console.log(password);
-    }
+        console.log(inputPasswordRef)
+    }, [email, password]);
 
     return (
         <div>
@@ -49,13 +57,21 @@ export const Login = () => {
             <form>
                 <label>
                     <span>Email</span>
-                    <input value={email} onChange={e => (setEmail(e.target.value))} type="text"/>
+                    <input 
+                    value={email} 
+                    onKeyDown={e => e.key === 'Enter' ? inputPasswordRef.current?.focus() : undefined} 
+                    onChange={e => (setEmail(e.target.value))} 
+                    type="text"/>
                     <p>Characters Length: {emailLength}</p>
                 </label>
 
                 <label>
                     <span>Password</span>
-                    <input value={password} onChange={e => (setPassword(e.target.value))} type="password"/>
+                    <input 
+                    ref={inputPasswordRef} 
+                    value={password} 
+                    onChange={e => (setPassword(e.target.value))} 
+                    type="password"/>
                 </label>
                 <button type="button" onClick={handleLogin}>Login</button>
             </form>
