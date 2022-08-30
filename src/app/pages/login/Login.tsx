@@ -1,7 +1,8 @@
 // import { Link } from "react-router-dom";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom"
+import { InputLogin } from "./components/InputLogin";
 
 
 export const Login = () => {
@@ -12,8 +13,6 @@ export const Login = () => {
 
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-
-    const inputPasswordRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         if (window.confirm('Are you a man?')) {
@@ -44,7 +43,6 @@ export const Login = () => {
     const handleLogin = useCallback(() => {
         console.log(email);
         console.log(password);
-        console.log(inputPasswordRef)
     }, [email, password]);
 
     return (
@@ -55,24 +53,19 @@ export const Login = () => {
             <button onClick={handleClick}>Home</button> 
             
             <form>
-                <label>
-                    <span>Email</span>
-                    <input 
-                    value={email} 
-                    onKeyDown={e => e.key === 'Enter' ? inputPasswordRef.current?.focus() : undefined} 
-                    onChange={e => (setEmail(e.target.value))} 
-                    type="text"/>
-                    <p>Characters Length: {emailLength}</p>
-                </label>
 
-                <label>
-                    <span>Password</span>
-                    <input 
-                    ref={inputPasswordRef} 
-                    value={password} 
-                    onChange={e => (setPassword(e.target.value))} 
-                    type="password"/>
-                </label>
+                <InputLogin 
+                    label="Email"
+                    value={email}
+                    onChange={newValue => setEmail(newValue)}
+                />
+
+                <InputLogin 
+                    label="Password"
+                    type="password"
+                    value={password}
+                    onChange={newValue => setPassword(newValue)}
+                />
                 <button type="button" onClick={handleLogin}>Login</button>
             </form>
         </div>
