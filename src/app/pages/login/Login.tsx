@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom"
+import { ButtonLogin } from "./components/ButtonLogin";
 import { InputLogin } from "./components/InputLogin";
 
 
@@ -66,7 +67,15 @@ export const Login = () => {
                     value={password}
                     onChange={newValue => setPassword(newValue)}
                 />
-                <button type="button" onClick={handleLogin}>Login</button>
+                <ButtonLogin 
+                    type="button"
+                    onClick={handleLogin}
+                > Sign in </ButtonLogin>
+                <ButtonLogin 
+                    type="button"
+                    text="Sign up"
+                    onClick={handleLogin}
+                />
             </form>
         </div>
     )

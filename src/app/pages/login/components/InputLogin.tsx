@@ -7,14 +7,14 @@ interface IInputLoginProps {
     onChange: (newValue: string) => void;
 }
 
-export const InputLogin: React.FC<IInputLoginProps> = (props) => {
+export const InputLogin = ({label, value, type, onChange}: IInputLoginProps) => {
     return (
         <label>
-            <span>{props.label}</span>
+            <span>{label}</span>
             <input 
-            value={props.value} 
-            type={props.type}
-            onChange={e => props.onChange(e.target.value)} 
+            value={value} 
+            type={type}
+            onChange={e => onChange(e.target.value)} 
             />
             {/* <p>Characters Length: {emailLength}</p> */}
         </label>
