@@ -5,7 +5,7 @@ import { useLoggedUser } from "../../shared/hooks";
 export const Dashboard = () => {
     const countRef = useRef(0);
 
-    const { userName } = useLoggedUser();
+    const { userName, logout } = useLoggedUser();
 
     return (
         <>
@@ -16,6 +16,8 @@ export const Dashboard = () => {
             <p>Counter (initial): {countRef.current}</p>
             <button onClick={()=> countRef.current++}>Som</button>
             <button onClick={() => console.log(countRef.current)}>Show final count</button>
+            <button onClick={logout}>Logout</button>
+
             <Link to={"/login"}>Login</Link>
         </>
     )
