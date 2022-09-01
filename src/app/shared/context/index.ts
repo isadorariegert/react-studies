@@ -1,2 +1,2 @@
-export * from './LoggedUser';
+export * from "./LoggedUser";
 
